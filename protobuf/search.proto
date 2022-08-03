@@ -1,14 +1,11 @@
 syntax = "proto3";
 
-option java_multiple_files = true;
-option java_package = "org.apache.dubbo.search";
-option java_outer_classname = "SearchService";
-option objc_class_prefix = "HLW";
+option go_package = "/search";
 
-package protobuf;
+package org.apache.dubbo;
 
 // The greeting service definition.
-service SearchService {
+service Search {
   // Sends a greeting
   rpc Search (SearchRequest) returns (SearchReply) {}
 }

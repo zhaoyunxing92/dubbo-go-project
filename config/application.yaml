@@ -1,34 +1,33 @@
 dubbo:
   registries:
     shanghai:
-      address: nacos://localhost:8848
+      address: nacos://192.168.56.100:8848
       timeout: 30s
       group: shanghai
+  protocols:
+    triple:
+      name: tri
+      port: 20000
   provider:
     services:
-      UserService:
-        protocol-ids:
-          - tri
-        interface: search_placeholder.Model
+      SearchService:
+        interface: org.apache.dubbo.Search
         group: search
         version: 1.0.0
-      OrderService:
-        protocol-ids:
-          - tri
-        interface: model_service.Service
-        group: search
+      ModelService:
+        interface: org.apache.dubbo.Model
+        group: model
         version: 1.0.0
   consumer:
+    check: false
     references:
-      UserService:
-        protocol: tri
-        interface: search_placeholder.Model
+      SearchClientImpl:
+        interface: org.apache.dubbo.Search
         group: search
         version: 1.0.0
-      OrderService:
-        protocol: tri
-        interface: model_service.Service
-        group: search
+      ModelClientImpl:
+        interface: org.apache.dubbo.Model
+        group: model
         version: 1.0.0
   shutdown:
     internal-signal: false

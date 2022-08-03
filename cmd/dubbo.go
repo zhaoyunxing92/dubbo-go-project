@@ -7,30 +7,29 @@ import (
 	"dubbo.apache.org/dubbo-go/v3/common/logger"
 	"dubbo.apache.org/dubbo-go/v3/config"
 	_ "dubbo.apache.org/dubbo-go/v3/imports"
-	hessian "github.com/apache/dubbo-go-hessian2"
 
-	"github.com/zhaoyunxing/domain"
-	"github.com/zhaoyunxing/reference"
+	"github.com/zhaoyunxing/client"
+	"github.com/zhaoyunxing/protobuf/search"
 	"github.com/zhaoyunxing/service"
 )
 
 func init() {
-	config.SetProviderService(&service.UserService{})
-	config.SetProviderService(&service.OrderService{})
-	hessian.RegisterPOJO(&domain.User{})
+	config.SetProviderService(&service.SearchService{})
+	config.SetProviderService(&service.ModelService{})
 }
 
 func main() {
 	var (
 		err error
-		res *domain.User
+		res *search.SearchReply
 	)
 
-	var rpcService = &reference.SearchService{}
+	var modelService = &client.ModelClientImpl{}
 
-	var modelService = &reference.ModelService{}
-	config.SetConsumerService(rpcService)
+	var searchService = &client.SearchClientImpl{}
+
 	config.SetConsumerService(modelService)
+	config.SetConsumerService(searchService)
 
 	if err = config.Load(config.WithPath("./config/application.yaml")); err != nil {
 		logger.Error(err)
@@ -38,14 +37,15 @@ func main() {
 
 	time.Sleep(3 * time.Second)
 
-	if res, err = rpcService.GetUser(context.TODO(), &domain.User{Name: "zhaoyunxing"}); err != nil {
+	if res, err = modelService.Search(context.TODO(), &search.SearchRequest{Name: "dubbo-go"}); err != nil {
 		logger.Error(err)
 	}
+	logger.Infof("name=%v", res.Message)
 
-	if res, err = modelService.GetUser(context.TODO(), &domain.User{Name: "zhaoyunxing"}); err != nil {
+	if res, err = searchService.Search(context.TODO(), &search.SearchRequest{Name: "dubbo-go"}); err != nil {
 		logger.Error(err)
 	}
-	logger.Infof("name=%v", res.Name)
+	logger.Infof("name=%v", res.Message)
 
 	//if err = config.Load(config.WithPath("./config/application.yaml")); err != nil {
 	//	fmt.Printf("dubbo go config load err: %v \n", err)
