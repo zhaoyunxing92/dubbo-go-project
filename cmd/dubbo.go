@@ -25,7 +25,6 @@ func main() {
 	)
 
 	var modelService = &client.ModelClientImpl{}
-
 	var searchService = &client.SearchClientImpl{}
 
 	config.SetConsumerService(modelService)
