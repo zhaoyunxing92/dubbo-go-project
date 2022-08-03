@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JsonSchemaMappingsProjectConfiguration">
+    <state>
+      <map>
+        <entry key="dubbo">
+          <value>
+            <SchemaInfo>
+              <option name="generatedName" value="New Schema" />
+              <option name="name" value="dubbo" />
+              <option name="relativePathToSchema" value="https://dubbogo.github.io/dubbo-go-schema/dubbo-go.json" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value="config/dubbo.yaml" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+        <entry key="dubbo-go">
+          <value>
+            <SchemaInfo>
+              <option name="generatedName" value="New Schema" />
+              <option name="name" value="dubbo-go" />
+              <option name="relativePathToSchema" value="https://dubbogo.github.io/dubbo-go-schema/dubbo-go.json" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value="config/application.yaml" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+      </map>
+    </state>
+  </component>
+</project>

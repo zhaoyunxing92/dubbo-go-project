@@ -1,0 +1,34 @@
+dubbo:
+  registries:
+    shanghai:
+      address: nacos://localhost:8848
+      timeout: 30s
+      group: shanghai
+  provider:
+    services:
+      UserService:
+        protocol-ids:
+          - tri
+        interface: search_placeholder.Model
+        group: search
+        version: 1.0.0
+      OrderService:
+        protocol-ids:
+          - tri
+        interface: model_service.Service
+        group: search
+        version: 1.0.0
+  consumer:
+    references:
+      UserService:
+        protocol: tri
+        interface: search_placeholder.Model
+        group: search
+        version: 1.0.0
+      OrderService:
+        protocol: tri
+        interface: model_service.Service
+        group: search
+        version: 1.0.0
+  shutdown:
+    internal-signal: false
