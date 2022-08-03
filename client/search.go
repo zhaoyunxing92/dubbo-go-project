@@ -12,7 +12,7 @@ import (
 	"github.com/dubbogo/triple/pkg/triple"
 )
 
-// ModelClient is the client API for Search service.
+// SearchClient is the client API for Search service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SearchClient interface {
